@@ -1,4 +1,3 @@
-// server.js
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
@@ -9,7 +8,6 @@ const PORT = 3000;
 const DATA_FILE = 'todos.json';
 const LOG_FILE = 'logs.txt';
 
-// Function to log API requests
 const logRequest = (method, endpoint) => {
     const timestamp = new Date().toISOString();
     const logMessage = `${timestamp} - ${method} ${endpoint}\n`;
@@ -18,7 +16,6 @@ const logRequest = (method, endpoint) => {
     });
 };
 
-// Function to read todos from the JSON file
 const readTodos = (callback) => {
     fs.readFile(DATA_FILE, 'utf8', (err, data) => {
         if (err) {
@@ -29,19 +26,16 @@ const readTodos = (callback) => {
     });
 };
 
-// Function to write todos to the JSON file
 const writeTodos = (todos, callback) => {
     fs.writeFile(DATA_FILE, JSON.stringify(todos, null, 2), (err) => {
         callback(err);
     });
 };
 
-// Create HTTP server
 const server = http.createServer((req, res) => {
     const parsedUrl = url.parse(req.url, true);
     const method = req.method;
 
-    // Log the request
     logRequest(method, req.url);
 
     if (method === 'GET' && parsedUrl.pathname === '/todos') {
@@ -78,7 +72,7 @@ const server = http.createServer((req, res) => {
                     res.writeHead(500);
                     res.end('Internal Server Error');
                 } else {
-                    const id = todos.length ? Math.max(todos.map(todo => todo.id)) + 1 : 1;
+                    const id = Math.max(0, ...todos.map((t) => +t.id)) + 1;
                     const todoToAdd = { id, title: newTodo.title, completed: newTodo.completed || false };
                     todos.push(todoToAdd);
                     writeTodos(todos, (err) => {
@@ -145,7 +139,6 @@ const server = http.createServer((req, res) => {
     }
 });
 
-// Start the server
 server.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });

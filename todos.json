@@ -1,4 +1,37 @@
 [
-    { "id": 1, "title": "Learn Node.js", "completed": false },
-    { "id": 2, "title": "Build an API", "completed": true }
+  {
+    "id": 1,
+    "title": "this is an update",
+    "completed": true
+  },
+  {
+    "id": 2,
+    "title": "is it working now?",
+    "completed": false
+  },
+  {
+    "id": null,
+    "title": "WOW",
+    "completed": false
+  },
+  {
+    "id": null,
+    "title": "huh",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "title": "again",
+    "completed": false
+  },
+  {
+    "id": 5,
+    "title": "yey?",
+    "completed": false
+  },
+  {
+    "id": 6,
+    "title": "YEY!!!",
+    "completed": false
+  }
 ]
